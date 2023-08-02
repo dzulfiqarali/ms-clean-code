@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (uh Handler) InsertDataUser(c *gin.Context) {
+func (h Handler) InsertDataUser(c *gin.Context) {
 	var request dto.RegistUserRequest
 
 	err := c.ShouldBindJSON(&request)
@@ -18,7 +18,7 @@ func (uh Handler) InsertDataUser(c *gin.Context) {
 		return
 	}
 
-	data, err := uh.UserService.RegistrationUser(request)
+	data, err := h.UserService.RegistrationUser(request)
 	if err != nil {
 		var resp map[string]interface{}
 		resp["responseCode"] = "0102"

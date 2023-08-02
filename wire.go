@@ -18,7 +18,7 @@ var Configs = wire.NewSet(
 )
 
 var Infra = wire.NewSet(
-	database.ConnectDatabase,
+	database.ProvideConn,
 )
 
 var UserDomain = wire.NewSet(
@@ -38,7 +38,7 @@ var Domains = wire.NewSet(
 // )
 var Routing = wire.NewSet(
 	wire.Struct(new(user.Handler), "*"),
-	user.ProvideUserHandler,
+	user.ProvideHandler,
 	router.ProvideRoute,
 )
 

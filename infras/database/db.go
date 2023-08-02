@@ -5,20 +5,34 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"log"
 )
 
-func ConnectDatabase() (*gorm.DB, error) {
+type Conn struct {
+	Read  *gorm.DB
+	Write *gorm.DB
+}
+
+// ProvideConn is the provider for db connection.
+func ProvideConn(config *configs.Config) *Conn {
+	return &Conn{
+		Read:  ConnectDatabaseRead(config),
+		Write: ConnectDatabaseWrite(config),
+	}
+}
+
+func ConnectDatabaseRead(configs *configs.Config) *gorm.DB {
 	dsn := fmt.Sprintf("dbname=%s host=%s port=%d user=%s password=%s",
-		configs.AppConfig.Database.Database,
-		configs.AppConfig.Database.Host,
-		configs.AppConfig.Database.Port,
-		configs.AppConfig.Database.Username,
-		configs.AppConfig.Database.Password,
+		configs.Database.Database,
+		configs.Database.Host,
+		configs.Database.Port,
+		configs.Database.Username,
+		configs.Database.Password,
 	)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		return nil, err
+		log.Fatal("Failed connecting to database with error: " + err.Error())
 	}
 
 	//err = db.AutoMigrate(&file_model.File{})
@@ -26,5 +40,27 @@ func ConnectDatabase() (*gorm.DB, error) {
 	//	return nil, err
 	//}
 
-	return db, nil
+	return db
+}
+
+func ConnectDatabaseWrite(configs *configs.Config) *gorm.DB {
+	dsn := fmt.Sprintf("dbname=%s host=%s port=%d user=%s password=%s",
+		configs.Database.Database,
+		configs.Database.Host,
+		configs.Database.Port,
+		configs.Database.Username,
+		configs.Database.Password,
+	)
+
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		log.Fatal("Failed connecting to database with error: " + err.Error())
+	}
+
+	//err = db.AutoMigrate(&file_model.File{})
+	//if err != nil {
+	//	return nil, err
+	//}
+
+	return db
 }
