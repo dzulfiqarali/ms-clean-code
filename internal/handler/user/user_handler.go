@@ -1,6 +1,8 @@
 package user
 
 import (
+	"net/http"
+
 	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model/dto"
 	"github.com/gin-gonic/gin"
 )
@@ -10,28 +12,28 @@ func (h Handler) InsertDataUser(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&request)
 	if err != nil {
-		var resp map[string]interface{}
-		resp["responseCode"] = "0101"
-		resp["responseMessage"] = "Invalid Request Parameter"
-
-		c.JSON(400, resp)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"responseCode":    "0101",
+			"responseMessage": "Failed Bind Request", // cast it to string before showing
+		})
 		return
 	}
 
 	data, err := h.UserService.RegistrationUser(request)
 	if err != nil {
-		var resp map[string]interface{}
-		resp["responseCode"] = "0102"
-		resp["responseMessage"] = "Failed"
 
-		c.JSON(400, resp)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"responseCode":    "0102",
+			"responseMessage": "Failed", // cast it to string before showing
+			"name":            data.Name,
+		})
 		return
 	}
 
-	var resp map[string]interface{}
-	resp["responseCode"] = "0000"
-	resp["responseMessage"] = "Success"
-	resp["name"] = data.Name
-	c.JSON(200, resp)
+	c.JSON(http.StatusOK, gin.H{
+		"responseCode":    "0000",
+		"responseMessage": "Success", // cast it to string before showing
+		"name":            data.Name,
+	})
 	return
 }

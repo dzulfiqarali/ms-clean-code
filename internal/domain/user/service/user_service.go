@@ -25,6 +25,6 @@ func (us UserService) RegistrationUser(request dto.RegistUserRequest) (resp dto.
 		return
 	}
 
-	resp = dto.DtoResponseUser(data)
+	resp = dto.DtoResponseUser(*data)
 	return
 }

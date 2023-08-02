@@ -6,7 +6,6 @@ import (
 	"bitbucket.org/bridce/ms-clean-code/configs"
 	"bitbucket.org/bridce/ms-clean-code/internal/handler/user"
 	"github.com/gin-gonic/gin"
-	"go.elastic.co/apm/module/apmgin/v2"
 )
 
 type Http struct {
@@ -26,7 +25,7 @@ func (h *Http) Serve() {
 	router := gin.New()
 	router.Use(gin.Recovery())
 	router.Use(gin.Logger())
-	router.Use(apmgin.Middleware(router))
+//	router.Use(apmgin.Middleware(router))
 
 	h.Router.Handler.SetupRoute(router)
 	
