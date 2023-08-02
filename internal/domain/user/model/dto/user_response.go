@@ -6,7 +6,8 @@ type RegistUserResponse struct {
 	Name string `json:"name"`
 }
 
-func (rur *RegistUserResponse) DtoResponseUser(data model.User) {
+func DtoResponseUser(data *model.User) (rur RegistUserResponse) {
 
 	rur.Name = data.Nama
+	return
 }

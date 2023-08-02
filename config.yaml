@@ -1,6 +1,6 @@
 DATABASE:
   DRIVER: "postgres"
-  HOST: "directdebit"
+  HOST: "127.0.0.1"
   PORT: 5432
   USERNAME: "briapi"
   PASSWORD: "password"

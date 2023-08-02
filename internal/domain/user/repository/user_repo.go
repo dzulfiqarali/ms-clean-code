@@ -15,15 +15,15 @@ func UserRepoImpl(db *database.Conn) UserRepoInterface {
 	}
 }
 
-func (ur UserRepoStrct) InsertDataUser(u model.User) (model.User, error) {
+func (ur UserRepoStrct) InsertDataUser(u model.User) (*model.User, error) {
 	tx := ur.db.Write.Begin()
 
 	err := tx.Debug().Create(&u).Error
 	if err != nil {
 		tx.Rollback()
-		return model.User{}, err
+		return &model.User{}, err
 	}
 
 	tx.Commit()
-	return u, nil
+	return &u, nil
 }

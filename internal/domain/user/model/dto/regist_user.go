@@ -6,10 +6,10 @@ import (
 )
 
 type RegistUserRequest struct {
-	Nama       string `json:"nama" validate:"required, alphaunicode"`
-	Alamat     string `json:"alamat" validate:"required, alphanumunicode"`
-	Umur       string `json:"umur" validate:"required, numeric"`
-	Pendidikan string `json:"pendidikan" validate:"required, alphanumunicode"`
+	Nama       string `json:"nama" validate:"required,alphaunicode"`
+	Alamat     string `json:"alamat" validate:"required,alphanumunicode"`
+	Umur       string `json:"umur" validate:"required,numeric"`
+	Pendidikan string `json:"pendidikan" validate:"required,alphanumunicode"`
 }
 
 func (u *RegistUserRequest) DtoRequest() (model.User, error) {

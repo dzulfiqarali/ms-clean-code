@@ -1,9 +1,10 @@
 package router
 
 import (
+	"fmt"
+
 	"bitbucket.org/bridce/ms-clean-code/configs"
 	"bitbucket.org/bridce/ms-clean-code/internal/handler/user"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.elastic.co/apm/module/apmgin/v2"
 )
@@ -27,6 +28,8 @@ func (h *Http) Serve() {
 	router.Use(gin.Logger())
 	router.Use(apmgin.Middleware(router))
 
+	h.Router.Handler.SetupRoute(router)
+	
 	addr := h.Config.Service.Host + ":" + h.Config.Service.Port
 
 	err := router.Run(addr)

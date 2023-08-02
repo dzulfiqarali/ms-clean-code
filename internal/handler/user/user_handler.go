@@ -33,4 +33,5 @@ func (h Handler) InsertDataUser(c *gin.Context) {
 	resp["responseMessage"] = "Success"
 	resp["name"] = data.Name
 	c.JSON(200, resp)
+	return
 }
