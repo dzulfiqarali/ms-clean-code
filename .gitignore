@@ -22,3 +22,5 @@ go.work
 
 # Ignore generated wiring file
 wire_gen.go
+
+.idea/
