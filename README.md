@@ -23,7 +23,7 @@ This repo is boilerplate go with:
  - clone this repo
  - open file main.go
  - execute command go generate or copy command `go run github.com/google/wire/cmd/wire` in terminal
-   - and then, file wire_gen is generate automation
+   - and then, file wire_gen was generate automation
  - now, you can running service
 
 ## Contributing
