@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (h Handler) InsertDataUser(c *gin.Context) {
+func (h UserHandler) InsertDataUser(c *gin.Context) {
 	var request dto.RegistUserRequest
 
 	err := c.ShouldBindJSON(&request)

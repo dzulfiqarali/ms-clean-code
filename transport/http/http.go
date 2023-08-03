@@ -1,23 +1,22 @@
-package router
+package http
 
 import (
-	"fmt"
-
 	"bitbucket.org/bridce/ms-clean-code/configs"
-	"bitbucket.org/bridce/ms-clean-code/internal/handler/user"
+	"bitbucket.org/bridce/ms-clean-code/internal/handler"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
 type Http struct {
-	Config *configs.Config
-	Gin    *gin.Engine
-	Router user.Router
+	Config  *configs.Config
+	Gin     *gin.Engine
+	Handler handler.Handler
 }
 
-func ProvideRoute(Config *configs.Config, router user.Router) *Http {
+func ProvideRoute(Config *configs.Config, handler handler.Handler) *Http {
 	return &Http{
-		Config: Config,
-		Router: router,
+		Config:  Config,
+		Handler: handler,
 	}
 }
 
@@ -25,10 +24,10 @@ func (h *Http) Serve() {
 	router := gin.New()
 	router.Use(gin.Recovery())
 	router.Use(gin.Logger())
-//	router.Use(apmgin.Middleware(router))
+	//	router.Use(apmgin.Middleware(router))
 
-	h.Router.Handler.SetupRoute(router)
-	
+	h.Handler.SetupRoute(router)
+
 	addr := h.Config.Service.Host + ":" + h.Config.Service.Port
 
 	err := router.Run(addr)

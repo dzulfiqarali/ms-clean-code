@@ -8,8 +8,10 @@ import (
 	"bitbucket.org/bridce/ms-clean-code/infras/database"
 	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/repository"
 	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/service"
+	"bitbucket.org/bridce/ms-clean-code/internal/handler"
+	"bitbucket.org/bridce/ms-clean-code/internal/handler/action"
 	"bitbucket.org/bridce/ms-clean-code/internal/handler/user"
-	"bitbucket.org/bridce/ms-clean-code/transport/http/router"
+	"bitbucket.org/bridce/ms-clean-code/transport/http"
 	"github.com/google/wire"
 )
 
@@ -36,19 +38,25 @@ var Domains = wire.NewSet(
 // var External = wire.NewSet(
 // call External
 // )
-var Routing = wire.NewSet(
-	wire.Struct(new(user.Handler), "*"),
-	user.ProvideHandler,
-	router.ProvideRoute,
+
+var Handler = wire.NewSet(
+	action.ProvideActionHandler,
+	user.ProvideUserHandler,
 )
 
-func InitializeService() *router.Http {
+var Routing = wire.NewSet(
+	handler.ProvideHandler,
+	http.ProvideRoute,
+)
+
+func InitializeService() *http.Http {
 	wire.Build(
 		Configs,
 		Infra,
 		Domains,
+		Handler,
 		Routing,
 	)
 
-	return &router.Http{}
+	return &http.Http{}
 }
