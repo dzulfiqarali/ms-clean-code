@@ -25,10 +25,11 @@ func ProvideHandler(
 func (h *Handler) SetupRoute(router *gin.Engine) {
 
 	api := router.Group("api")
-	v1 := api.Group("/v1.0/service")
+	v1 := api.Group("/v1/service")
 
 	// user
 	v1.POST("/user/register", h.User.InsertDataUser)
+	v1.GET("/users", h.User.ResolveListUser)
 
 	//action
 	v1.POST("action/register", h.Action.Create)

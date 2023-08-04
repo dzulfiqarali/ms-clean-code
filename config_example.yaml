@@ -1,11 +1,11 @@
 DATABASE:
   DRIVER: "postgres"
-  HOST: "127.0.0.1"
+  HOST: "localhost"
   PORT: 5432
   USERNAME: ""
-  PASSWORD: "password"
+  PASSWORD: ""
   DATABASE: ""
 
 SERVICE:
-  HOST: "127.0.0.1"
+  HOST: "localhost"
   PORT: 6969

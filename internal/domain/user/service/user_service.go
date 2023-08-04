@@ -28,3 +28,16 @@ func (us UserService) RegistrationUser(request dto.RegistUserRequest) (resp dto.
 	resp = dto.DtoResponseUser(*data)
 	return
 }
+
+func (us UserService) ResovleListUserByFilter(req dto.UserListRequest) (response dto.ResponseListUser) {
+	filter := req.ToFilter()
+
+	users, err := us.ur.List(filter)
+	if err != nil {
+		return
+	}
+
+	response = dto.NewResponseListUser(users, filter)
+
+	return
+}
