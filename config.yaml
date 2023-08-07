@@ -2,9 +2,9 @@ DATABASE:
   DRIVER: "postgres"
   HOST: "127.0.0.1"
   PORT: 5432
-  USERNAME: ""
+  USERNAME: "briapi"
   PASSWORD: "password"
-  DATABASE: ""
+  DATABASE: "dd-test"
 
 SERVICE:
   HOST: "127.0.0.1"

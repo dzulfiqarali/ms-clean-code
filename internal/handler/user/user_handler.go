@@ -30,6 +30,13 @@ func (h UserHandler) InsertDataUser(c *gin.Context) {
 		return
 	}
 
+	defer func() {
+		if err != nil {
+			h.l.Error(err, "handler : InsertDataUser", "", nil, request, err, nil, nil)
+		}
+		h.l.Success(request, data, nil, nil, "handler : InsertDataUser", "nil", nil)
+	}()
+
 	c.JSON(http.StatusOK, gin.H{
 		"responseCode":    "0000",
 		"responseMessage": "Success", // cast it to string before showing

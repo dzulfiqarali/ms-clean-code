@@ -6,6 +6,7 @@ package main
 import (
 	"bitbucket.org/bridce/ms-clean-code/configs"
 	"bitbucket.org/bridce/ms-clean-code/infras/database"
+	"bitbucket.org/bridce/ms-clean-code/infras/log"
 	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/repository"
 	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/service"
 	"bitbucket.org/bridce/ms-clean-code/internal/handler"
@@ -21,6 +22,7 @@ var Configs = wire.NewSet(
 
 var Infra = wire.NewSet(
 	database.ProvideConn,
+	log.ProvideConnElk,
 )
 
 var UserDomain = wire.NewSet(

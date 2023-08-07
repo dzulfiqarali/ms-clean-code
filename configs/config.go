@@ -15,6 +15,14 @@ type Config struct {
 		Database string `mapstructure:"DATABASE"`
 	} `mapstructure:"DATABASE"`
 
+	Elastic struct {
+		Host     string `mapstructure:"HOST"`
+		Port     string `mapstructure:"PORT"`
+		Username string `mapstructure:"USERNAME"`
+		Password string `mapstructure:"PASSWORD"`
+		Index    string `mapstructure:"Index"`
+	}
+
 	Service struct {
 		Host string `mapstructure:"HOST"`
 		Port string `mapstructure:"PORT"`
