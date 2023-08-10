@@ -2,6 +2,7 @@ package database
 
 import (
 	"bitbucket.org/bridce/ms-clean-code/configs"
+	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model"
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -35,10 +36,10 @@ func ConnectDatabaseRead(configs *configs.Config) *gorm.DB {
 		log.Fatal("Failed connecting to database with error: " + err.Error())
 	}
 
-	//err = db.AutoMigrate(&file_model.File{})
-	//if err != nil {
-	//	return nil, err
-	//}
+	err = db.Debug().AutoMigrate(&model.User{})
+	if err != nil {
+		return db
+	}
 
 	return db
 }

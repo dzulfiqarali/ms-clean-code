@@ -24,3 +24,4 @@ go.work
 wire_gen.go
 
 .idea/
+config.yaml

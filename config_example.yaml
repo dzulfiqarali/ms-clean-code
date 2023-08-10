@@ -1,0 +1,11 @@
+DATABASE:
+  DRIVER: "postgres"
+  HOST: "localhost"
+  PORT: 5432
+  USERNAME: ""
+  PASSWORD: ""
+  DATABASE: ""
+
+SERVICE:
+  HOST: "localhost"
+  PORT: 6969

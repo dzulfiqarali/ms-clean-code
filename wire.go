@@ -5,6 +5,8 @@ package main
 
 import (
 	"bitbucket.org/bridce/ms-clean-code/configs"
+	"bitbucket.org/bridce/ms-clean-code/external"
+	"bitbucket.org/bridce/ms-clean-code/external/fakeapi"
 	"bitbucket.org/bridce/ms-clean-code/infras/database"
 	"bitbucket.org/bridce/ms-clean-code/infras/log"
 	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/repository"
@@ -25,6 +27,12 @@ var Infra = wire.NewSet(
 	log.ProvideConnElk,
 )
 
+var ExternalService = wire.NewSet(
+	fakeapi.NewClientRequest,
+	wire.Bind(new(fakeapi.FakeApiImpl), new(*fakeapi.ClientImpl)),
+	external.ProvideFakeApi,
+)
+
 var UserDomain = wire.NewSet(
 	//service
 	service.UserInterface,
@@ -35,11 +43,6 @@ var UserDomain = wire.NewSet(
 var Domains = wire.NewSet(
 	UserDomain,
 )
-
-// set wire to external service
-// var External = wire.NewSet(
-// call External
-// )
 
 var Handler = wire.NewSet(
 	action.ProvideActionHandler,
@@ -55,6 +58,7 @@ func InitializeService() *http.Http {
 	wire.Build(
 		Configs,
 		Infra,
+		ExternalService,
 		Domains,
 		Handler,
 		Routing,

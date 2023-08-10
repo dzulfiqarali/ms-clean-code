@@ -1,6 +1,7 @@
 package dto
 
 import (
+	"bitbucket.org/bridce/ms-clean-code/external/fakeapi"
 	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model"
 	"github.com/go-playground/validator/v10"
 )
@@ -39,4 +40,15 @@ func (u *RegistUserRequest) ValidateRequest() error {
 	}
 
 	return nil
+}
+
+func (u *RegistUserRequest) DtoFakeApi() fakeapi.RequestFakeAPI {
+
+	return fakeapi.RequestFakeAPI{
+		Tittle:      "test product",
+		Price:       13.5,
+		Description: "test",
+		Image:       "'https://i.pravatar.cc",
+		Category:    "electronic",
+	}
 }

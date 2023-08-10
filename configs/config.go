@@ -20,8 +20,12 @@ type Config struct {
 		Port     string `mapstructure:"PORT"`
 		Username string `mapstructure:"USERNAME"`
 		Password string `mapstructure:"PASSWORD"`
-		Index    string `mapstructure:"Index"`
-	}
+		Index    string `mapstructure:"INDEX"`
+	} `mapstructure:"ELASTIC"`
+
+	FakeApi struct {
+		Host string `mapstructure:"HOST"`
+	} `mapstructure:"FAKEAPI"`
 
 	Service struct {
 		Host string `mapstructure:"HOST"`
