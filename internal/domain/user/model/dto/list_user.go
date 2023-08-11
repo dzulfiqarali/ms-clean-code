@@ -1,8 +1,8 @@
 package dto
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model"
 	"github.com/guregu/null"
+	"github.com/ms-clean-code/internal/domain/user/model"
 	"strconv"
 )
 

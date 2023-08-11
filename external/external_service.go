@@ -1,8 +1,8 @@
 package external
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/configs"
-	"bitbucket.org/bridce/ms-clean-code/external/fakeapi"
+	"github.com/ms-clean-code/configs"
+	"github.com/ms-clean-code/external/fakeapi"
 )
 
 // external : populate all domain implementation  external

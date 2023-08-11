@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model"
+	"github.com/ms-clean-code/internal/domain/user/model"
 	"math"
 )
 

@@ -4,8 +4,8 @@ import (
 	"github.com/guregu/null"
 	"net/http"
 
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model/dto"
 	"github.com/gin-gonic/gin"
+	"github.com/ms-clean-code/internal/domain/user/model/dto"
 )
 
 func (h UserHandler) InsertDataUser(c *gin.Context) {

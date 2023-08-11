@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model"
 	"errors"
 	"fmt"
+	"github.com/ms-clean-code/internal/domain/user/model"
 	"strings"
 )
 

@@ -1,8 +1,8 @@
 package user
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/infras/log"
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/service"
+	"github.com/ms-clean-code/infras/log"
+	"github.com/ms-clean-code/internal/domain/user/service"
 )
 
 type UserHandler struct {

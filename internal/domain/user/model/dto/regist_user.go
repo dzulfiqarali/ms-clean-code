@@ -1,9 +1,9 @@
 package dto
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/external/fakeapi"
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model"
 	"github.com/go-playground/validator/v10"
+	"github.com/ms-clean-code/external/fakeapi"
+	"github.com/ms-clean-code/internal/domain/user/model"
 )
 
 type RegistUserRequest struct {

@@ -31,6 +31,13 @@ type Config struct {
 		Host string `mapstructure:"HOST"`
 		Port string `mapstructure:"PORT"`
 	} `mapstructure:"SERVICE"`
+
+	Server struct {
+		Shutdown struct {
+			CleanupPeriodSeconds int64 `mapstructure:"CLEANUP_PERIOD_SECONDS"`
+			GracePeriodSeconds   int64 `mapstructure:"GRACE_PERIOD_SECONDS"`
+		}
+	} `mapstructure:"SERVER"`
 }
 
 func LoadConfig() (AppConfig *Config) {

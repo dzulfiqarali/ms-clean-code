@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/internal/handler/action"
-	"bitbucket.org/bridce/ms-clean-code/internal/handler/user"
 	"github.com/gin-gonic/gin"
+	"github.com/ms-clean-code/internal/handler/action"
+	"github.com/ms-clean-code/internal/handler/user"
 )
 
 // Handler : populate all domain handler

@@ -1,10 +1,10 @@
 package service
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/external/fakeapi"
-	"bitbucket.org/bridce/ms-clean-code/infras/log"
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model/dto"
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/repository"
+	"github.com/ms-clean-code/external/fakeapi"
+	"github.com/ms-clean-code/infras/log"
+	"github.com/ms-clean-code/internal/domain/user/model/dto"
+	"github.com/ms-clean-code/internal/domain/user/repository"
 )
 
 type UserService struct {

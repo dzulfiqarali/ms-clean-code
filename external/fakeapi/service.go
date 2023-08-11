@@ -1,9 +1,9 @@
 package fakeapi
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/configs"
 	"crypto/tls"
 	"github.com/go-resty/resty/v2"
+	"github.com/ms-clean-code/configs"
 	"time"
 )
 

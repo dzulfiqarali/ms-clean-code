@@ -1,9 +1,9 @@
 package database
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/configs"
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model"
 	"fmt"
+	"github.com/ms-clean-code/configs"
+	"github.com/ms-clean-code/internal/domain/user/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"

@@ -1,8 +1,8 @@
 package log
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/configs"
 	"fmt"
+	"github.com/ms-clean-code/configs"
 	"github.com/olivere/elastic/v7"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"

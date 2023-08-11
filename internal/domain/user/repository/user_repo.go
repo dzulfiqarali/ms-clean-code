@@ -1,10 +1,10 @@
 package repository
 
 import (
-	"bitbucket.org/bridce/ms-clean-code/infras/database"
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/model"
-	"bitbucket.org/bridce/ms-clean-code/internal/domain/user/query"
 	"fmt"
+	"github.com/ms-clean-code/infras/database"
+	"github.com/ms-clean-code/internal/domain/user/model"
+	"github.com/ms-clean-code/internal/domain/user/query"
 )
 
 type UserRepoStrct struct {
