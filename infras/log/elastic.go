@@ -23,12 +23,14 @@ type stackTracer interface {
 	StackTrace() errors.StackTrace
 }
 
+//TODO: Move This Function to package log and provide log custom
 func ProvideConnElk(config *configs.Config) *LogCustom {
 	return &LogCustom{
 		Logrus: InitConnElk(config),
 	}
 }
 
+//TODO: Move to folder infra/ealstic and create Provide func for connect to elastic
 func InitConnElk(config *configs.Config) *logrus.Logger {
 	var log *logrus.Logger
 
@@ -56,6 +58,7 @@ func InitConnElk(config *configs.Config) *logrus.Logger {
 	return log
 }
 
+//TODO: Move to package log
 func (l *LogCustom) Error(err error, description, respTime string, traceHeader map[string]string, req, resp, reqBE, respBE interface{}) {
 	err = errors.WithStack(err)
 	st := err.(stackTracer).StackTrace()
@@ -73,6 +76,7 @@ func (l *LogCustom) Error(err error, description, respTime string, traceHeader m
 	}).Error(description)
 }
 
+//TODO: Move to package log
 func (l *LogCustom) Success(req, resp, reqBE, respBE interface{}, description, respTime string, traceHeader map[string]string) {
 
 	l.Logrus.WithFields(logrus.Fields{
@@ -85,6 +89,7 @@ func (l *LogCustom) Success(req, resp, reqBE, respBE interface{}, description, r
 	}).Info(description)
 }
 
+//TODO: Move to package log
 func selfLogError(err error, description string, log *logrus.Logger) {
 	err = errors.WithStack(err)
 	st := err.(stackTracer).StackTrace()
