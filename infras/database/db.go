@@ -3,7 +3,6 @@ package database
 import (
 	"fmt"
 	"github.com/ms-clean-code/configs"
-	"github.com/ms-clean-code/internal/domain/user/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
@@ -36,11 +35,6 @@ func ConnectDatabaseRead(configs *configs.Config) *gorm.DB {
 		log.Fatal("Failed connecting to database with error: " + err.Error())
 	}
 
-	err = db.Debug().AutoMigrate(&model.User{})
-	if err != nil {
-		return db
-	}
-
 	return db
 }
 
@@ -57,11 +51,6 @@ func ConnectDatabaseWrite(configs *configs.Config) *gorm.DB {
 	if err != nil {
 		log.Fatal("Failed connecting to database with error: " + err.Error())
 	}
-
-	//err = db.AutoMigrate(&file_model.File{})
-	//if err != nil {
-	//	return nil, err
-	//}
 
 	return db
 }

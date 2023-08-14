@@ -1,11 +1,10 @@
 package user
 
 import (
-	"github.com/guregu/null"
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/guregu/null"
 	"github.com/ms-clean-code/internal/domain/user/model/dto"
+	"net/http"
 )
 
 func (h UserHandler) InsertDataUser(c *gin.Context) {
