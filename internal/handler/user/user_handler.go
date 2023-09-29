@@ -71,19 +71,15 @@ func (h UserHandler) ResolveUserByName(c *gin.Context) {
 	}
 
 	if isNumeric(req.Nama.String) {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"responseCode":    "5000",
-			"responseMessage": "interval server error", // cast it to string before showing
-		})
+		shared.Failed(c, shared.CustomError(h.UserService.Error(shared.MakeError(errSvc.BadRequest))))
+		c.Abort()
 		return
 	}
 
 	data, err := h.UserService.ResovleUserByName(req)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{
-			"responseCode":    "4000",
-			"responseMessage": "not found", // cast it to string before showing
-		})
+		shared.Failed(c, shared.CustomError(h.UserService.Error(err)))
+		c.Abort()
 		return
 	}
 
