@@ -42,7 +42,7 @@ func ProvideRoute(Config *configs.Config, handler handler.Handler) *Http {
 }
 
 func (h *Http) Serve() {
-	router := gin.New()
+	router := gin.Default()
 	router.Use(gin.Recovery())
 	router.Use(gin.Logger())
 	//	router.Use(apmgin.Middleware(router))

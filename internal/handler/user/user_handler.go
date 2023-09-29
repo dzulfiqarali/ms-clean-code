@@ -3,8 +3,11 @@ package user
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/guregu/null"
+	errSvc "github.com/ms-clean-code/internal/domain/error"
 	"github.com/ms-clean-code/internal/domain/user/model/dto"
+	"github.com/ms-clean-code/shared"
 	"net/http"
+	"regexp"
 )
 
 func (h UserHandler) InsertDataUser(c *gin.Context) {
@@ -12,21 +15,15 @@ func (h UserHandler) InsertDataUser(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&request)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"responseCode":    "0101",
-			"responseMessage": "Failed Bind Request", // cast it to string before showing
-		})
+		shared.Failed(c, shared.CustomError(h.UserService.Error(shared.MakeError(errSvc.BadRequest))))
+		c.Abort()
 		return
 	}
 
 	data, err := h.UserService.RegistrationUser(request)
 	if err != nil {
-
-		c.JSON(http.StatusBadRequest, gin.H{
-			"responseCode":    "0102",
-			"responseMessage": "Failed", // cast it to string before showing
-			"name":            data.Name,
-		})
+		shared.Failed(c, shared.CustomError(h.UserService.Error(err)))
+		c.Abort()
 		return
 	}
 
@@ -63,4 +60,42 @@ func (h UserHandler) ResolveListUser(c *gin.Context) {
 		"data":            data,
 	})
 	return
+}
+
+func (h UserHandler) ResolveUserByName(c *gin.Context) {
+
+	req := dto.UserListRequest{
+		Nama: null.StringFrom(c.Param("nama")),
+	}
+
+	if isNumeric(req.Nama.String) {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"responseCode":    "5000",
+			"responseMessage": "interval server error", // cast it to string before showing
+		})
+		return
+	}
+
+	data, err := h.UserService.ResovleUserByName(req)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"responseCode":    "4000",
+			"responseMessage": "not found", // cast it to string before showing
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"responseCode":    "0000",
+		"responseMessage": "Success", // cast it to string before showing
+		"data":            data,
+	})
+	return
+}
+
+func isNumeric(word string) bool {
+	return regexp.MustCompile(`\d`).MatchString(word)
+	// calling regexp.MustCompile() function to create the regular expression.
+	// calling MatchString() function that returns a bool that
+	// indicates whether a pattern is matched by the string.
 }

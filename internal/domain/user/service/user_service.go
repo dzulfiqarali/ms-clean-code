@@ -1,10 +1,13 @@
 package service
 
 import (
+	"errors"
 	"github.com/ms-clean-code/external/fakeapi"
 	"github.com/ms-clean-code/infras/log"
+	errSvc "github.com/ms-clean-code/internal/domain/error"
 	"github.com/ms-clean-code/internal/domain/user/model/dto"
 	"github.com/ms-clean-code/internal/domain/user/repository"
+	"github.com/ms-clean-code/shared"
 )
 
 type UserService struct {
@@ -30,9 +33,17 @@ func (us UserService) RegistrationUser(request dto.RegistUserRequest) (resp dto.
 		us.l.Success(request, resp, nil, nil, "service : RegistrationUser", "nil", nil)
 	}()
 
+	errC := request.ValidateRequest()
+	switch errC.TypeErr.Error() {
+	case "required":
+		err = shared.MakeError(errSvc.InvalidMandatory, errC.Field)
+	default:
+		err = shared.MakeError(errSvc.InvalidFormat, errC.Field)
+	}
+
 	dataDb, err := request.DtoRequest()
 	if err != nil {
-		//
+		err = shared.MakeError(errSvc.BadRequest)
 		return
 	}
 
@@ -45,7 +56,7 @@ func (us UserService) RegistrationUser(request dto.RegistUserRequest) (resp dto.
 
 	data, err := us.ur.InsertDataUser(dataDb)
 	if err != nil {
-		//
+		err = shared.MakeError(errSvc.InternalServerError)
 		return
 	}
 
@@ -58,6 +69,24 @@ func (us UserService) ResovleListUserByFilter(req dto.UserListRequest) (response
 
 	users, err := us.ur.List(filter)
 	if err != nil {
+		return
+	}
+
+	response = dto.NewResponseListUser(users, filter)
+
+	return
+}
+
+func (us UserService) ResovleUserByName(req dto.UserListRequest) (response dto.ResponseListUser, err error) {
+	filter := req.ToFilter()
+
+	users, err := us.ur.List(filter)
+	if err != nil {
+		return
+	}
+
+	if len(users) == 0 {
+		err = errors.New("not found")
 		return
 	}
 

@@ -1,9 +1,11 @@
 package dto
 
 import (
+	"errors"
 	"github.com/go-playground/validator/v10"
 	"github.com/ms-clean-code/external/fakeapi"
 	"github.com/ms-clean-code/internal/domain/user/model"
+	"strings"
 )
 
 type RegistUserRequest struct {
@@ -13,12 +15,12 @@ type RegistUserRequest struct {
 	Pendidikan string `json:"pendidikan" validate:"required,alphanumunicode"`
 }
 
-func (u *RegistUserRequest) DtoRequest() (model.User, error) {
+type ErrorCustom struct {
+	Field   string
+	TypeErr error
+}
 
-	err := u.ValidateRequest()
-	if err != nil {
-		return model.User{}, err
-	}
+func (u *RegistUserRequest) DtoRequest() (model.User, error) {
 
 	user := model.User{
 		Nama:       u.Nama,
@@ -30,16 +32,27 @@ func (u *RegistUserRequest) DtoRequest() (model.User, error) {
 	return user, nil
 }
 
-func (u *RegistUserRequest) ValidateRequest() error {
+func (u *RegistUserRequest) ValidateRequest() (errC ErrorCustom) {
 
 	validate := validator.New()
-
 	err := validate.Struct(u)
 	if err != nil {
-		return err
+		fieldError := err.(validator.ValidationErrors)
+		errC = parsingError(strings.Split(fieldError.Error(), " ")[5], strings.Split(fieldError.Error(), " ")[9])
+		return
 	}
 
-	return nil
+	return
+}
+
+func parsingError(str ...string) (err ErrorCustom) {
+	for i, s := range str {
+		str[i] = strings.ReplaceAll(s, "'", "")
+	}
+	err.Field = str[0]
+	err.TypeErr = errors.New(str[1])
+
+	return
 }
 
 func (u *RegistUserRequest) DtoFakeApi() fakeapi.RequestFakeAPI {

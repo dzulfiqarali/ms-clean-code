@@ -6,7 +6,6 @@ package main
 import (
 	"github.com/google/wire"
 	"github.com/ms-clean-code/configs"
-	"github.com/ms-clean-code/external"
 	"github.com/ms-clean-code/external/fakeapi"
 	"github.com/ms-clean-code/infras/database"
 	"github.com/ms-clean-code/infras/log"
@@ -30,7 +29,6 @@ var Infra = wire.NewSet(
 var ExternalService = wire.NewSet(
 	fakeapi.NewClientRequest,
 	wire.Bind(new(fakeapi.FakeApiImpl), new(*fakeapi.ClientImpl)),
-	external.ProvideFakeApi,
 )
 
 var UserDomain = wire.NewSet(
