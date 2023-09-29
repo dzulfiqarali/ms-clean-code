@@ -34,11 +34,12 @@ func (h UserHandler) InsertDataUser(c *gin.Context) {
 		h.l.Success(request, data, nil, nil, "handler : InsertDataUser", "nil", nil)
 	}()
 
-	c.JSON(http.StatusOK, gin.H{
-		"responseCode":    "0000",
-		"responseMessage": "Success", // cast it to string before showing
-		"name":            data.Name,
-	})
+	shared.Success(
+		c,
+		shared.SetStatusCode(http.StatusOK),
+		shared.SetMessage("Successful"),
+		shared.SetData(data),
+	)
 	return
 }
 
@@ -54,11 +55,12 @@ func (h UserHandler) ResolveListUser(c *gin.Context) {
 
 	data := h.UserService.ResovleListUserByFilter(req)
 
-	c.JSON(http.StatusOK, gin.H{
-		"responseCode":    "0000",
-		"responseMessage": "Success", // cast it to string before showing
-		"data":            data,
-	})
+	shared.Success(
+		c,
+		shared.SetStatusCode(http.StatusOK),
+		shared.SetMessage("Successful"),
+		shared.SetData(data),
+	)
 	return
 }
 
@@ -85,11 +87,12 @@ func (h UserHandler) ResolveUserByName(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"responseCode":    "0000",
-		"responseMessage": "Success", // cast it to string before showing
-		"data":            data,
-	})
+	shared.Success(
+		c,
+		shared.SetStatusCode(http.StatusOK),
+		shared.SetMessage("Successful"),
+		shared.SetData(data),
+	)
 	return
 }
 

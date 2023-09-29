@@ -37,6 +37,24 @@ func Successful() *Base {
 		ResponseMessage: http.StatusText(http.StatusBadRequest),
 	}
 }
+func SetStatusCode(statusCode int) func(b *Base) {
+	return func(b *Base) {
+		httpCode := strconv.Itoa(statusCode)
+		b.ResponseCode = httpCode + ServiceCode + "00"
+	}
+}
+
+func SetMessage(message string) func(b *Base) {
+	return func(b *Base) {
+		b.ResponseMessage = message
+	}
+}
+
+func SetData(data interface{}) func(b *Base) {
+	return func(b *Base) {
+		b.Data = data
+	}
+}
 
 func CustomError(e Error) func(b *Base) {
 	return func(b *Base) {
@@ -45,6 +63,5 @@ func CustomError(e Error) func(b *Base) {
 		b.Error = e.GetError().Error()
 		b.ResponseCode = httpCode + ServiceCode + e.GetCaseCode()
 		b.ResponseMessage = e.GetMessage()
-		b.Data = ""
 	}
 }

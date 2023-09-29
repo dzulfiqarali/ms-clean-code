@@ -1,6 +1,8 @@
 package shared
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 func Failed(c *gin.Context, applies ...func(b *Base)) {
 	baseResponse := Failure()
