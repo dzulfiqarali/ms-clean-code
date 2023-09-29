@@ -21,8 +21,15 @@ type ListUser struct {
 	Pendidikan string `json:"pendidikan"`
 }
 
+func NewResponseUser(data []model.ListUser) (result ListUser) {
+	result.Nama = data[0].Nama
+	result.Alamat = data[0].Alamat
+	result.Pendidikan = data[0].Pendidikan
+	return
+}
+
 type ResponseListUser struct {
-	Data     []ListUser `json:"data"`
+	Data     []ListUser `json:"listUser"`
 	Metadata Metadata   `json:"metadata"`
 }
 
