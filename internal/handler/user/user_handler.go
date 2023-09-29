@@ -36,7 +36,7 @@ func (h UserHandler) InsertDataUser(c *gin.Context) {
 
 	shared.Success(
 		c,
-		shared.SetStatusCode(http.StatusOK),
+		shared.SetStatusCode(http.StatusCreated),
 		shared.SetMessage("Successful"),
 		shared.SetData(data),
 	)
