@@ -17,7 +17,7 @@ type Base struct {
 	StatusCode      int         `json:"-"`
 	ResponseCode    string      `json:"responseCode"`
 	ResponseMessage string      `json:"responseMessage"`
-	Data            interface{} `json:"data,omitempty"`
+	AdditionalInfo  interface{} `json:"additionalInfo,omitempty"`
 }
 
 func Failure() *Base {
@@ -50,9 +50,9 @@ func SetMessage(message string) func(b *Base) {
 	}
 }
 
-func SetData(data interface{}) func(b *Base) {
+func SetAdditonalInfo(data interface{}) func(b *Base) {
 	return func(b *Base) {
-		b.Data = data
+		b.AdditionalInfo = data
 	}
 }
 
