@@ -11,7 +11,7 @@ func Failed(c *gin.Context, applies ...func(b *Base)) {
 		apply(baseResponse)
 	}
 
-	respondFailde(c, baseResponse)
+	respondFailed(c, baseResponse)
 }
 
 func Success(c *gin.Context, data interface{}, applies ...func(b *Base)) {
@@ -24,7 +24,7 @@ func Success(c *gin.Context, data interface{}, applies ...func(b *Base)) {
 }
 
 // ErrorMessage ...
-func respondFailde(c *gin.Context, baseResponse *Base) {
+func respondFailed(c *gin.Context, baseResponse *Base) {
 	c.JSON(baseResponse.StatusCode, baseResponse)
 }
 
