@@ -88,7 +88,6 @@ func (h UserHandler) ResolveUserByName(c *gin.Context) {
 		data,
 		shared.SetStatusCode(http.StatusOK),
 		shared.SetMessage("Successful"),
-		//shared.SetAdditonalInfo(data),
 	)
 	return
 }

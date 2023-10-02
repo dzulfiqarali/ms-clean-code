@@ -50,7 +50,7 @@ func SetMessage(message string) func(b *Base) {
 	}
 }
 
-func SetAdditonalInfo(data interface{}) func(b *Base) {
+func SetData(data interface{}) func(b *Base) {
 	return func(b *Base) {
 		b.AdditionalInfo = data
 	}
