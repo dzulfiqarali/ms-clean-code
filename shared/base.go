@@ -50,12 +50,6 @@ func SetMessage(message string) func(b *Base) {
 	}
 }
 
-func SetData(data interface{}) func(b *Base) {
-	return func(b *Base) {
-		b.Data = data
-	}
-}
-
 func CustomError(e Error) func(b *Base) {
 	return func(b *Base) {
 		b.StatusCode = e.GetHTTPCode()

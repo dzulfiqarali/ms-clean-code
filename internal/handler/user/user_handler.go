@@ -36,6 +36,7 @@ func (h UserHandler) InsertDataUser(c *gin.Context) {
 
 	shared.Success(
 		c,
+		data,
 		shared.SetStatusCode(http.StatusCreated),
 		shared.SetMessage("Successful"),
 	)
@@ -56,9 +57,9 @@ func (h UserHandler) ResolveListUser(c *gin.Context) {
 
 	shared.Success(
 		c,
+		data,
 		shared.SetStatusCode(http.StatusOK),
 		shared.SetMessage("Successful"),
-		shared.SetData(data),
 	)
 	return
 }
@@ -84,9 +85,10 @@ func (h UserHandler) ResolveUserByName(c *gin.Context) {
 
 	shared.Success(
 		c,
+		data,
 		shared.SetStatusCode(http.StatusOK),
 		shared.SetMessage("Successful"),
-		shared.SetData(data),
+		//shared.SetData(data),
 	)
 	return
 }
