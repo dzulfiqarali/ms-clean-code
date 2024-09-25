@@ -31,10 +31,10 @@ func Failure() *Base {
 
 func Successful() *Base {
 	return &Base{
-		Error:           http.StatusText(http.StatusBadRequest),
-		StatusCode:      http.StatusBadRequest,
-		ResponseCode:    http.StatusText(http.StatusBadRequest),
-		ResponseMessage: http.StatusText(http.StatusBadRequest),
+		Error:           http.StatusText(http.StatusCreated),
+		StatusCode:      http.StatusCreated,
+		ResponseCode:    http.StatusText(http.StatusCreated),
+		ResponseMessage: http.StatusText(http.StatusCreated),
 	}
 }
 func SetStatusCode(statusCode int) func(b *Base) {
