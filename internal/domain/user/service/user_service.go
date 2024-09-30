@@ -64,7 +64,7 @@ func (us UserService) RegistrationUser(request dto.RegistUserRequest) (resp dto.
 	return
 }
 
-func (us UserService) ResovleListUserByFilter(req dto.UserListRequest) (response dto.ResponseListUser) {
+func (us UserService) ResolveListUserByFilter(req dto.UserListRequest) (response dto.ResponseListUser) {
 	filter := req.ToFilter()
 
 	users, err := us.ur.List(filter)
@@ -77,7 +77,7 @@ func (us UserService) ResovleListUserByFilter(req dto.UserListRequest) (response
 	return
 }
 
-func (us UserService) ResovleUserByName(req dto.UserListRequest) (response dto.ListUser, err error) {
+func (us UserService) ResolveUserByName(req dto.UserListRequest) (response dto.ListUser, err error) {
 	filter := req.ToFilter()
 
 	users, err := us.ur.List(filter)
