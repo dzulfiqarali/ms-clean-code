@@ -53,7 +53,7 @@ func (h UserHandler) ResolveListUser(c *gin.Context) {
 		Size:       null.StringFrom(c.Query("size")),
 	}
 
-	data := h.UserService.ResovleListUserByFilter(req)
+	data := h.UserService.ResolveListUserByFilter(req)
 
 	shared.Success(
 		c,
@@ -76,7 +76,7 @@ func (h UserHandler) ResolveUserByName(c *gin.Context) {
 		return
 	}
 
-	data, err := h.UserService.ResovleUserByName(req)
+	data, err := h.UserService.ResolveUserByName(req)
 	if err != nil {
 		shared.Failed(c, shared.CustomError(h.UserService.Error(err)))
 		c.Abort()
